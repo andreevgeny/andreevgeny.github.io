@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Основа — резюме, после которого отвечают</title>
+<style>
+  :root{
+    --bg:#faf7f2; --paper:#ffffff; --wash:#f3ece2;
+    --ink:#2b2620; --ink-2:#57503f; --muted:#8a8172;
+    --line:#e6ddce; --accent:#a8491c; --accent-soft:#f7e8de;
+    --ok:#3d6b4f;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--ink);
+    font:18px/1.65 Georgia,"Times New Roman",serif;
+    -webkit-font-smoothing:antialiased}
+  .wrap{max-width:760px;margin:0 auto;padding:64px 24px 0}
+
+  .kicker{font:600 13px/1 -apple-system,"Segoe UI",sans-serif;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--accent);margin-bottom:18px}
+  h1{font-size:44px;line-height:1.12;font-weight:700;letter-spacing:-.01em;margin-bottom:20px}
+  .lead{font-size:21px;line-height:1.55;color:var(--ink-2);margin-bottom:34px;max-width:60ch}
+
+  .btn{display:inline-block;background:var(--accent);color:#fff;text-decoration:none;
+    font:600 17px/1 -apple-system,"Segoe UI",sans-serif;
+    padding:17px 30px;border-radius:12px;border:1px solid #8f3d16;
+    box-shadow:0 2px 0 #8f3d16, 0 10px 24px rgba(168,73,28,.22);
+    transition:transform .14s ease, box-shadow .14s ease}
+  .btn:hover{transform:translateY(-1px);box-shadow:0 3px 0 #8f3d16, 0 14px 28px rgba(168,73,28,.26)}
+  .btn:active{transform:translateY(1px);box-shadow:0 1px 0 #8f3d16}
+  .btn-ghost{display:inline-block;background:transparent;color:var(--accent);text-decoration:none;
+    font:600 16px/1 -apple-system,"Segoe UI",sans-serif;
+    padding:15px 26px;border-radius:12px;border:1.5px solid var(--accent);
+    transition:background .14s ease}
+  .btn-ghost:hover{background:var(--accent-soft)}
+  .under{color:var(--muted);font:15px/1.5 -apple-system,"Segoe UI",sans-serif;margin-top:14px}
+
+  section{padding:72px 0;border-top:1px solid var(--line)}
+  section:first-of-type{border-top:none}
+  h2{font-size:30px;line-height:1.2;margin-bottom:14px;font-weight:700}
+  .sub{font-size:18px;color:var(--ink-2);margin-bottom:30px;max-width:64ch}
+
+  .pain{display:grid;gap:14px;margin-bottom:28px}
+  .pain div{background:var(--paper);border:1px solid var(--line);border-left:4px solid var(--accent);
+    border-radius:12px;padding:16px 20px;font-size:17px;color:var(--ink-2)}
+  .pain b{color:var(--ink)}
+
+  .ba{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .ba .card{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:20px 22px}
+  .ba .was{color:var(--muted);background:var(--wash)}
+  .ba .now{border:2px solid var(--accent)}
+  .ba .tag{font:700 12px/1 -apple-system,sans-serif;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--muted);display:block;margin-bottom:12px}
+  .ba .now .tag{color:var(--accent)}
+  .ba p{font-size:15.5px;line-height:1.55}
+
+  .steps{counter-reset:s;display:grid;gap:0;margin-bottom:6px}
+  .step{display:grid;grid-template-columns:52px 1fr;gap:18px;padding:22px 0;border-bottom:1px dashed var(--line)}
+  .step:last-child{border-bottom:none}
+  .step::before{counter-increment:s;content:counter(s);
+    width:52px;height:52px;border-radius:50%;background:var(--accent-soft);color:var(--accent);
+    font:700 22px/52px Georgia;text-align:center}
+  .step h3{font-size:19px;margin-bottom:6px}
+  .step p{font-size:16px;color:var(--ink-2)}
+
+  .tiers{display:grid;gap:16px}
+  .tier{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:24px 26px}
+  .tier.star{border:2px solid var(--accent);position:relative}
+  .tier.star::before{content:"Выбирают чаще";position:absolute;top:-11px;left:22px;
+    background:var(--accent);color:#fff;font:600 12px/1 -apple-system,sans-serif;
+    padding:5px 12px;border-radius:999px;letter-spacing:.04em}
+  .tier h3{font-size:20px;margin-bottom:2px}
+  .tier .for{font-size:14.5px;color:var(--muted);margin-bottom:12px}
+  .tier .price{font-size:30px;font-weight:700;margin-bottom:12px}
+  .tier .price span{font-size:15px;font-weight:400;color:var(--muted)}
+  .tier ul{list-style:none;margin-bottom:16px}
+  .tier li{font-size:15.5px;color:var(--ink-2);padding-left:26px;position:relative;margin-bottom:7px}
+  .tier li::before{content:"—";position:absolute;left:0;color:var(--accent)}
+
+  .honest{background:var(--wash);border-radius:16px;padding:26px 28px}
+  .honest p{font-size:17px;color:var(--ink-2)}
+  .honest b{color:var(--ink)}
+
+  .qa{display:grid;gap:14px}
+  .qa details{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:16px 20px}
+  .qa summary{font-weight:700;cursor:pointer;font-size:16.5px}
+  .qa p{margin-top:10px;font-size:15.5px;color:var(--ink-2)}
+
+  .final{text-align:center;padding:84px 0}
+  .final .lead{margin-left:auto;margin-right:auto}
+
+  .pay{background:var(--paper);border:1px solid var(--line);border-radius:14px;
+    padding:20px 24px;font-size:15.5px;color:var(--ink-2);margin:28px 0 0;text-align:left}
+  .pay b{color:var(--ink)}
+
+  footer{border-top:1px solid var(--line);margin-top:64px;padding:28px 24px 48px;
+    text-align:center;font:15px/1.6 -apple-system,"Segoe UI",sans-serif;color:var(--muted)}
+  footer a{color:var(--accent);text-decoration:none;border-bottom:1px solid currentColor}
+
+  @media (max-width:640px){
+    body{font-size:17px}
+    .wrap{padding:44px 18px 0}
+    h1{font-size:32px}
+    .lead{font-size:18px}
+    section{padding:52px 0}
+    .ba{grid-template-columns:1fr}
+    .tier.star{order:-1}
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <header>
+    <p class="kicker">Основа · резюме под вашу реальную карьеру</p>
+    <h1>Вам отвечают на три отклика из ста. Дело не в опыте — дело в первых четырёх строках.</h1>
+    <p class="lead">Меня зовут Евгений Андреев, мне 50, за плечами семь индустрий — от теплосети до разработки ботов. Я разобрал свою карьеру на проверяемые факты, собрал из них файл-Основу и теперь делаю то же для людей, чей путь не был прямой. Без выдуманных процентов. Каждая строка — с меткой «подтверждено».</p>
+    <a class="btn" href="https://t.me/eandreev">Показать мой резюме-разбор — бесплатно</a>
+    <p class="under">Первый разбор занимает 10 минут и ничего не стоит. Дальше решаете сами.</p>
+  </header>
+
+  <section>
+    <h2>Почему молчат на отклики</h2>
+    <p class="sub">Рекрутер тратит на первый проход по резюме около 7 секунд (исследование Ladders, eye-tracking). За это время он ищет ответ на один вопрос: какую задачу этот человек решит? Вот что он видит вместо:</p>
+    <div class="pain">
+      <div><b>«Руководитель проектов, ответственный за…»</b> — это кто вы. А нужен тот, кто решит его задачу на этой неделе.</div>
+      <div><b>«Минус 40 % жалоб, рост эффективности»</b> — цифры без опоры. Один уточняющий вопрос — и вы провалились.</div>
+      <div><b>Три страницы биографии</b> — опыт перечислен, а не продан. Самое сильное спрятано на третьей странице.</div>
+    </div>
+    <p class="sub">Это лечится не «красивым написанием», а разбором: что из вашего опыта бьёт в конкретную вакансию. Смотрите, как это выглядит.</p>
+  </section>
+
+  <section>
+    <h2>Мой собственный первый экран — до и после</h2>
+    <div class="ba">
+      <div class="card was"><span class="tag">Было</span><p>UX/UI Designer, Product Psychologist. Снижение повторных жалоб на 40 %. CJM, JTBD, CustDev.</p></div>
+      <div class="card now"><span class="tag">Стало</span><p>Исследователь и проектировщик опыта в сложных системах: промышленная автоматизация, премиальный сервис, образование, AI-интерфейсы. Обучил 400+ человек · узлы учёта газа и тепла · Telegram-бот на Python — 4 355 строк, 15+ релизов, репозиторий открыт.</p></div>
+    </div>
+    <p class="under">Проценты слева я сам когда-то не считал. Справа — только то, что проверяется за минуту: 400 обученных, узлы учёта, открытый код. Именно за это звонят.</p>
+  </section>
+
+  <section>
+    <h2>Как это работает</h2>
+    <div class="steps">
+      <div class="step"><div><h3>Бесплатный разбор — 10 минут</h3><p>Присылаете резюме (можно в любом виде). Я возвращаю голосовое или текст: три места, где оно теряет отклики, и что исправить первым. Без оплаты, без обязательств — мне нужна практика на живых примерах, вам — честный диагноз.</p></div></div>
+      <div class="step"><div><h3>Первый экран — 1 490 ₽, за 24 часа</h3><p>Переписываю заголовок, четыре строки «зачем я вам» и три главных пункта под конкретную вакансию. Одна итерация правок входит. Если не зайдёт — файл ваш, деньги не возвращаю, но и не держу.</p></div></div>
+      <div class="step"><div><h3>Основа — разбор всей карьеры</h3><p>12 вопросов голосовыми в удобное время. Из ответов собираю файл: каждый факт с меткой «подтверждено / оценка / не писать» и стоп-лист того, что писать нельзя. Из него любая версия резюме собирается за 20 минут — хоть через год.</p></div></div>
+    </div>
+    <p class="under">Начинаем с первого шага — он бесплатный и ни к чему не обязывает.</p>
+  </section>
+
+  <section>
+    <h2>Что можно заказать</h2>
+    <div class="tiers">
+      <div class="tier star">
+        <h3>Основа + резюме</h3>
+        <p class="for">для тех, кто хочет один раз разобраться и больше не переписывать резюме с нуля</p>
+        <div class="price">5 900 ₽ <span>· первым пяти 3 900 ₽</span></div>
+        <ul>
+          <li>12 вопросов голосовыми, когда удобно</li>
+          <li>файл Основа: факты с метками, стоп-лист</li>
+          <li>резюме под одну роль + сопроводительное</li>
+          <li>48 часов после ответов, две итерации правок</li>
+        </ul>
+        <a class="btn" href="https://t.me/eandreev">Начать с бесплатного разбора</a>
+      </div>
+      <div class="tier">
+        <h3>Первый экран</h3>
+        <p class="for">если нужна только одна вакансия и быстро</p>
+        <div class="price">1 490 ₽</div>
+        <ul>
+          <li>заголовок и 4 строки «зачем я вам»</li>
+          <li>3 главных пункта под вакансию</li>
+          <li>24 часа, одна итерация правок</li>
+        </ul>
+        <a class="btn-ghost" href="https://t.me/eandreev">Обсудить</a>
+      </div>
+      <div class="tier">
+        <h3>Основа+</h3>
+        <p class="for">для тех, кто идёт на несколько разных ролей сразу</p>
+        <div class="price">12 900 ₽</div>
+        <ul>
+          <li>всё из «Основы + резюме»</li>
+          <li>резюме под 3 роли</li>
+          <li>страница-портфолио по ссылке</li>
+          <li>«Опора»: страница фактов перед собеседованием + аудио 4 минуты</li>
+        </ul>
+        <a class="btn-ghost" href="https://t.me/eandreev">Обсудить</a>
+      </div>
+    </div>
+    <div class="pay"><b>Как оплатить.</b> СБП по номеру +7(925)888-58-82, получатель Евгений Валерьевич А. Чек самозанятого — в течение часа. Первый экран — вперёд целиком, Основа — половина вперёд, половина после первой версии. 1 490 за первый экран засчитываются при переходе на Осную в течение 30 дней.</div>
+  </section>
+
+  <section>
+    <div class="honest">
+      <h2>Чего я не обещаю</h2>
+      <p><b>Не обещаю</b> офферов, числа приглашений и сроков трудоустройства — это зависит от рынка и от вас на собеседовании. <b>Обещаю</b> другое: файл в срок, каждая строка с подтверждением, правки до «это я». И стоп-лист: то, за что вам будет неловко на уточняющем вопросе, в резюме не попадёт. Мне 50 и моя репутация — это всё, что здесь продаётся.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Частые вопросы</h2>
+    <div class="qa">
+      <details><summary>На Kwork делают за 1 500. Чем вы лучше?</summary><p>На Kwork продают файл. После моей работы вы сами соберёте любую версию за 20 минут, потому что у вас остаётся Основа — файл всей карьеры с метками. Нужен просто файл — честно, Kwork дешевле.</p></details>
+      <details><summary>Я сам сделаю в ChatGPT</summary><p>Сделаете. Модель напишет то же, что двустам откликнувшимся, — рекрутеры узнают этот стиль с первого абзаца. Модель не знает, что именно из вашего опыта продаёт в эту вакансию. Я разбираю это с вами по вопросам.</p></details>
+      <details><summary>Мне 47, возраст — приговор?</summary><p>Мне 50. Возраст читается не из даты рождения, а из того, как написан опыт: перечислением мест за 25 лет. Периоды старше 15 лет сворачиваются в одну строку, первый экран пишется под задачу. Проверил на себе.</p></details>
+      <details><summary>А гарантия, что возьмут?</summary><p>Нет и не будет — и тот, кто обещает, врёт. Гарантирую файл за 48 часов, метку у каждой строки и две итерации правок.</p></details>
+    </div>
+  </section>
+
+  <section class="final">
+    <h2>Начните с бесплатного разбора</h2>
+    <p class="lead">Пришлите резюме — через 10 минут вы узнаете три места, где оно теряет отклики. Дальше решаете сами, и это нормально, если решите «ничего не делать».</p>
+    <a class="btn" href="https://t.me/eandreev">Написать в Telegram</a>
+    <p class="under">Отвечаю сам, без ассистентов. Обычно в течение часа.</p>
+  </section>
+
+</div>
+
+<footer>
+  Канал с разборами и примерами до/после: <a href="https://t.me/EVAN_OCHOBA">t.me/EVAN_OCHOBA</a><br>
+  Евгений Андреев · Основа · Москва / удалённо
+</footer>
+
+</body>
+</html>

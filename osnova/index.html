@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="ru" data-page-node-id="rfPr7ETtGE9dlc46MqUHXr">
+<head data-page-node-id="TYV0nzwc7eCbTKn3P0b3tD">
+<meta charset="utf-8" data-page-node-id="fnUN8PK5EsHAC4R3s4OYMH">
+<meta name="viewport" content="width=device-width,initial-scale=1" data-page-node-id="LZQiPuXAPDhrs3JzreHxC1">
+<title>Основа — резюме, которое проверяется</title>
+<style>
+  :root {
+    --bg:#f7f6f3; --surface:#ffffff; --surface-2:#f1efeb;
+    --ink:#1a1a19; --ink-2:#454543; --muted:#6b6862;
+    --line:#e3e0d9; --line-2:#cec9bf;
+    --accent:#a8491c; --accent-soft:#fbeade;
+    --shadow:0 1px 2px rgba(20,18,14,.05), 0 8px 24px rgba(20,18,14,.05);
+  }
+  :root[data-theme="dark"] {
+    --bg:#131312; --surface:#1b1b1a; --surface-2:#222220;
+    --ink:#f0efec; --ink-2:#c5c3bd; --muted:#8f8d86;
+    --line:#2e2d2a; --line-2:#3d3b37;
+    --accent:#e88b4c; --accent-soft:#2b2018;
+    --shadow:0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.25);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme]) {
+      --bg:#131312; --surface:#1b1b1a; --surface-2:#222220;
+      --ink:#f0efec; --ink-2:#c5c3bd; --muted:#8f8d86;
+      --line:#2e2d2a; --line-2:#3d3b37;
+      --accent:#e88b4c; --accent-soft:#2b2018;
+      --shadow:0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.25);
+    }
+  }
+
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--ink);margin:0;padding:36px 20px 72px;
+    font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,"Helvetica Neue",sans-serif;
+    -webkit-font-smoothing:antialiased;
+    transition:background-color .22s ease, color .22s ease}
+  .wrap{max-width:840px;margin:0 auto}
+
+  h1{font-size:34px;line-height:1.16;letter-spacing:-.02em;margin:0 0 12px}
+  .lead{font-size:19px;line-height:1.5;color:var(--ink-2);margin:0 0 28px;max-width:62ch}
+  h2{font-size:13px;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);
+    margin:44px 0 14px;padding-bottom:10px;border-bottom:1px solid var(--line);font-weight:650}
+  p{margin:0 0 14px;color:var(--ink-2)}
+
+  .btn{display:block;width:fit-content;background:var(--ink);color:var(--bg);
+    padding:15px 26px;border-radius:10px;text-decoration:none;font-size:17px;
+    margin:16px auto 0;border:1px solid var(--ink);
+    transition:transform .15s ease, opacity .15s ease}
+  .btn:hover{transform:translateY(-1px);opacity:.92;text-decoration:none}
+  .btn:active{transform:translateY(0)}
+
+  .ba{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:12px;
+    padding:14px 16px;font-size:14.5px;box-shadow:var(--shadow)}
+  .card b{display:block;font-size:12px;text-transform:uppercase;letter-spacing:.08em;
+    color:var(--muted);margin-bottom:8px}
+  .card.was{color:var(--muted);background:var(--surface-2)}
+  .card.now{border-color:var(--accent);box-shadow:var(--shadow)}
+  .todo{display:inline-block;border:1px dashed var(--line-2);border-radius:6px;
+    padding:2px 8px;color:var(--muted);background:var(--surface-2);font-size:13px}
+
+  .tiers{display:grid;grid-template-columns:repeat(auto-fit,minmax(228px,1fr));gap:14px;margin-top:4px}
+  .tier{background:var(--surface);border:1px solid var(--line);border-radius:14px;
+    padding:18px;box-shadow:var(--shadow);transition:transform .16s ease, border-color .16s ease}
+  .tier:hover{transform:translateY(-2px);border-color:var(--line-2)}
+  .tier h3{margin:0 0 4px;font-size:17px;letter-spacing:-.01em}
+  .tier .price{font-size:23px;font-weight:680;letter-spacing:-.02em;margin:6px 0 12px}
+  .tier .price span{font-size:14px;font-weight:400;color:var(--muted)}
+  .tier ul{margin:0;padding-left:18px;font-size:14px;color:var(--ink-2)}
+  .tier li{margin-bottom:5px}
+  .tier li:last-child{margin-bottom:0}
+  .tier:nth-child(2){border-color:var(--accent)}
+
+  .note{background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--line-2);
+    border-radius:10px;padding:14px 16px;font-size:14.5px;color:var(--ink-2);margin:0}
+  .note.pay{border-left-color:var(--accent);background:var(--accent-soft);color:var(--ink)}
+  .who{background:var(--surface);border:1px solid var(--line);border-radius:12px;
+    padding:14px 16px;font-size:15px;color:var(--ink-2);margin-top:14px}
+
+  footer{margin-top:32px;text-align:center;font-size:13px;color:var(--muted)}
+  footer a{color:var(--accent)}
+
+  /* круглый переключатель темы: авто → светлая → тёмная */
+  .tt{position:fixed;top:18px;right:18px;width:44px;height:44px;border-radius:50%;
+    display:grid;place-items:center;cursor:pointer;z-index:50;
+    background:var(--surface);color:var(--ink-2);
+    border:1px solid var(--line);box-shadow:var(--shadow);
+    transition:transform .16s ease, border-color .16s ease, color .16s ease}
+  .tt:hover{transform:scale(1.06);border-color:var(--accent);color:var(--accent)}
+  .tt:active{transform:scale(.96)}
+  .tt svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:1.7;
+    stroke-linecap:round;stroke-linejoin:round}
+  .tt .i-light,.tt .i-dark{display:none}
+  .tt[data-mode="light"] .i-auto{display:none}
+  .tt[data-mode="light"] .i-light{display:block}
+  .tt[data-mode="dark"] .i-auto{display:none}
+  .tt[data-mode="dark"] .i-dark{display:block}
+  :focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+
+  @media (max-width:620px){
+    body{padding:28px 16px 56px}
+    h1{font-size:27px}
+    .lead{font-size:17px}
+    .ba{grid-template-columns:1fr}
+    .tt{top:12px;right:12px;width:40px;height:40px}
+  }
+  @media print{ .tt{display:none} body{background:#fff;color:#000} }
+</style>
+</head>
+<body data-page-node-id="SANCeLIqigGxakdf5tPaG7">
+
+<button class="tt" id="tt" type="button" data-mode="auto" title="Тема: как в системе" aria-label="Переключить тему" data-page-node-id="NzT9NGK8d1sbhSu4wt3pvr">
+  <svg class="i-auto" viewBox="0 0 24 24" aria-hidden="true" data-page-node-id="zCYP06J6LrAy1bofhvUMvd"><circle cx="12" cy="12" r="9" data-page-node-id="8pp13ciUk3PiCIRFJo99nr"/><path d="M12 3v18" fill="currentColor" stroke="none" data-page-node-id="lPDQlLy8p2z6gtbSyOVYt7"/></svg>
+  <svg class="i-light" viewBox="0 0 24 24" aria-hidden="true" data-page-node-id="5uZv88yETr2G895RZBrPxv"><circle cx="12" cy="12" r="4.2" data-page-node-id="1TI8FPNATlhPOum2WyKE9d"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.2 5.2l1.6 1.6M17.2 17.2l1.6 1.6M18.8 5.2l-1.6 1.6M6.8 17.2l-1.6 1.6" data-page-node-id="BB1aXTCOKTnAWWBnuvpLY7"/></svg>
+  <svg class="i-dark" viewBox="0 0 24 24" aria-hidden="true" data-page-node-id="1DMpQsCLoG1eQzp85eEqwK"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z" data-page-node-id="EmpBHLVGGPNkJW7XFtfrAO"/></svg>
+</button>
+
+<div class="wrap" data-page-node-id="9KVFT4FWmu8G3T4ilwMlVF">
+
+<h1 data-page-node-id="kcnhqCfdFPdFDR5Hqp1kG2">Резюме из Основы: каждая строка проверяется, любая версия под вакансию за 20 минут</h1>
+<p class="lead" data-page-node-id="bHhFZCT8qmzNe8IxDAePXE">Для людей, у кого карьера не по прямой, за 40, много опыта и мало откликов. Разбираю карьеру на факты, ставлю метки «подтверждается / оценка / не писать» и собираю резюме, на которое отвечают.</p>
+
+<a class="btn" href="https://t.me/eandreev" data-page-node-id="5cAetlwQtI8FgIcjK9LV5F">Написать в Telegram — первый разбор бесплатно</a>
+
+<h2 data-page-node-id="KWXkleDNOmCSSn0J3rsvBP">Мой собственный первый экран</h2>
+<div class="ba" data-page-node-id="1FB37ADDMGnFPgKGUTlnC1">
+  <div class="card was" data-page-node-id="E5dYhDkalkWoEHIxaFfTZj"><b data-page-node-id="IHwdPbMWgA1GXnKsEHUfUX">Было</b>UX/UI Designer, Product Psychologist. Снижение повторных жалоб на 40 %. CJM, JTBD, CustDev.</div>
+  <div class="card now" data-page-node-id="Q2PHQXA2pRc6up64UQFVHD"><b data-page-node-id="VYgkIEwuuBgHccbiP91BoS">Стало</b>Исследователь и проектировщик опыта в сложных системах: промышленная автоматизация, премиальный сервис, образование, AI-интерфейсы. 28 лет на стыке инженерии и человеческого поведения. Проверяется за минуту: обучил 400+ человек в трёх службах · узлы учёта газа и тепла от проекта до сдачи · Telegram-бот на Python — 4 355 строк, 15+ релизов, репозиторий открыт.</div>
+</div>
+<p class="who" data-page-node-id="yHbAiHYHDcl4CHw2xDo1La">Мне 49. Двадцать восемь лет в семи индустриях: казино, теплосети, газ, сервис элитного посёлка, художественная школа, обучение персонала, разработка ботов на Python. Всё, что предлагаю, сначала сделал на себе.</p>
+
+<h2 data-page-node-id="Gn4BVf3xaeneCJfUPFgbZn">Что можно заказать</h2>
+<div class="tiers" data-page-node-id="fC9qjJjIq5bkNFhwMrpx9C">
+  <div class="tier" data-page-node-id="47T61JLkYMYRqJq6vqzOLq">
+    <h3 data-page-node-id="kfXBM137lTIEKUOXFbPi4o">Первый экран</h3>
+    <div class="price" data-page-node-id="pSFlocpLG1cqmSsQ9FbupG">1 490 ₽</div>
+    <ul data-page-node-id="YOgHuyYMiBBLvhh4BGMtYi">
+      <li data-page-node-id="QklqfAsDdjaYuC60y2dBxI">заголовок и 4 строки «зачем я вам»</li>
+      <li data-page-node-id="CkyKMmF3d4wOiaNqOm0A3f">3 главных пункта под одну вакансию</li>
+      <li data-page-node-id="C03JKOyjNwDDO6ISemyJq0">за 24 часа, одна итерация правок</li>
+    </ul>
+  </div>
+  <div class="tier" data-page-node-id="WFijHRCBkTgVOd8bwcSfzy">
+    <h3 data-page-node-id="UkN33V48pxfrnKL5K0Efby">Основа + резюме</h3>
+    <div class="price" data-page-node-id="5b4p1gytxQRzbik7LXBueu">5 900 ₽ <span data-page-node-id="5bvoh3QkNut4wiVQAhw5k8">· первым пяти 3 900</span></div>
+    <ul data-page-node-id="7mvn8VdNgDkw7U46dZrL9X">
+      <li data-page-node-id="kRSfGNYavagIpTUMFGe6En">12 вопросов голосовыми, в удобное время</li>
+      <li data-page-node-id="QcmuDZUflTMaUDFT2FHsk9">файл Основа: все факты с метками, стоп-лист</li>
+      <li data-page-node-id="mSQ63FQXyOExBVgvzGSOXz">резюме под 1 роль + сопроводительное</li>
+      <li data-page-node-id="AUHoZa5BMw6o0uOdFqGDYq">за 48 часов, две итерации правок</li>
+    </ul>
+  </div>
+  <div class="tier" data-page-node-id="XuQplcGHEuwFMlBb291Py1">
+    <h3 data-page-node-id="gBltpBRT8tFiPeH9jlokF0">Основа+</h3>
+    <div class="price" data-page-node-id="YlMVxpwh34fMmae7frWuzy">12 900 ₽</div>
+    <ul data-page-node-id="RRVmnQ2AYYIlhZqHz8bwY0">
+      <li data-page-node-id="QpA80PYjOLnn1XBjKe9HWQ">всё из предыдущего</li>
+      <li data-page-node-id="IXD8cBE7wL1TfiB1gwARBm">резюме под 3 роли</li>
+      <li data-page-node-id="hSzN1RO73uTAVSMCAf4ZFR">страница-портфолио по ссылке</li>
+      <li data-page-node-id="71RV3HuORcGh8mkcGMoGjr">«Опора»: страница фактов о себе перед собеседованием + аудио 4 минуты</li>
+    </ul>
+  </div>
+</div>
+
+<h2 data-page-node-id="ZPlFvhVs5Jq8LbYrwWVVqI">Чего не обещаю</h2>
+<p class="note" data-page-node-id="KZV5HFdknLc9rEhPPOluxX">Оффер, число приглашений, срок трудоустройства. Обещаю: файл в срок, каждая строка с подтверждением, правки до «это я».</p>
+
+<h2 data-page-node-id="Htore14AjBeJyABHWLLggi">Как оплатить</h2>
+<p class="note pay" data-page-node-id="yNyytp8hvId4TNFCqNXNiG">СБП по номеру +7(925)888-58-82, получатель: Евгений Валерьевич А., Озон банк. Чек самозанятого приходит в течение часа. Первый экран — вперёд, Основа — половина вперёд, половина после первой версии.</p>
+
+<a class="btn" href="https://t.me/eandreev" data-page-node-id="Ks826w5giOLnoK7VzzcpZF">Написать в Telegram</a>
+
+<footer data-page-node-id="wliPmCViRxEIFumDf3rZnK">Канал с примерами до/после: <a href="https://t.me/OSNOVA" data-page-node-id="1f75Ges257tQRfz8HhSz7u">t.me/OSNOVA</a></footer>
+
+</div>
+
+<script>
+(function(){
+  var KEY='osnova-theme', btn=document.getElementById('tt'), root=document.documentElement;
+  var LABEL={auto:'Тема: как в системе', light:'Тема: светлая', dark:'Тема: тёмная'};
+  var ORDER=['auto','light','dark'];
+  var mq=window.matchMedia?window.matchMedia('(prefers-color-scheme: dark)'):{matches:false};
+  function shown(m){ return m==='auto' ? (mq.matches?'dark':'light') : m; }
+  function apply(mode){
+    if(mode==='auto'){ root.removeAttribute('data-theme'); }
+    else { root.setAttribute('data-theme', mode); }
+    btn.setAttribute('data-mode', mode);
+    btn.setAttribute('title', LABEL[mode]);
+    btn.setAttribute('aria-label', LABEL[mode]);
+    try{ localStorage.setItem(KEY, mode); }catch(e){}
+  }
+  function next(cur){
+    var curShown=shown(cur), cand=ORDER.filter(function(m){ return m!==cur; });
+    for(var i=0;i<cand.length;i++){ if(shown(cand[i])!==curShown) return cand[i]; }
+    return cand[0];
+  }
+  var saved=null;
+  try{ saved=localStorage.getItem(KEY); }catch(e){}
+  apply(ORDER.indexOf(saved)>=0 ? saved : 'auto');
+  btn.addEventListener('click', function(){
+    apply(next(btn.getAttribute('data-mode')));
+  });
+})();
+</script>
+</body>
+</html>

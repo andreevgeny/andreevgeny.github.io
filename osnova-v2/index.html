@@ -3,185 +3,240 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Основа — резюме, после которого отвечают</title>
+<!--
+  Структура страницы: методика StoryBrand SB7 (Дональд Миллер, "Building a StoryBrand", 2017)
+  01 Герой и проблема (клиент, не продавец) -> 02 Гид (эмпатия + авторитет) -> 03 План из трёх шагов
+  -> 04 Призыв к действию -> 05 Избежание провала -> 06 Успех -> оффер, снятие риска, FAQ, финальный CTA.
+  Дополняющие приёмы: PAS в блоке 01, снятие рисков по Чалдини (честность как авторитет).
+  Каждый смысловой блок закрывает психотип клиента (акцентуации по Леонгарду—Личко в адаптации
+  тренингов продаж): истероид — признание и статус; эпилептоид — порядок, сроки, состав работ;
+  паранойяльный — цель, результат, выгода; шизоид — логика, схема, проверяемые факты.
+-->
+<title>Основа — резюме, после которого отвечают. Инженерный разбор карьеры</title>
 <style>
   :root{
-    --bg:#faf7f2; --paper:#ffffff; --wash:#f3ece2;
-    --ink:#2b2620; --ink-2:#57503f; --muted:#8a8172;
-    --line:#e6ddce; --accent:#a8491c; --accent-soft:#f7e8de;
-    --ok:#3d6b4f;
+    --bg:#f8f6f1; --paper:#ffffff; --grid:#e7e2d6;
+    --ink:#22201b; --ink-2:#4c4941; --muted:#8b8577;
+    --accent:#a8491c; --accent-soft:#f5e7dc;
+    --mono:"SF Mono",ui-monospace,Menlo,Consolas,monospace;
   }
   *{margin:0;padding:0;box-sizing:border-box}
   html{scroll-behavior:smooth}
   body{background:var(--bg);color:var(--ink);
-    font:18px/1.65 Georgia,"Times New Roman",serif;
-    -webkit-font-smoothing:antialiased}
-  .wrap{max-width:760px;margin:0 auto;padding:64px 24px 0}
+    font:17px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+    background-size:56px 56px}
+  .frame{max-width:820px;margin:0 auto;background:var(--paper);
+    border-left:1px solid var(--grid);border-right:1px solid var(--grid);
+    padding:0 56px}
+  .block{padding:56px 0;border-bottom:1px dashed var(--grid)}
+  .block:last-of-type{border-bottom:none}
 
-  .kicker{font:600 13px/1 -apple-system,"Segoe UI",sans-serif;letter-spacing:.14em;
-    text-transform:uppercase;color:var(--accent);margin-bottom:18px}
-  h1{font-size:44px;line-height:1.12;font-weight:700;letter-spacing:-.01em;margin-bottom:20px}
-  .lead{font-size:21px;line-height:1.55;color:var(--ink-2);margin-bottom:34px;max-width:60ch}
+  .label{font:600 12px/1 var(--mono);letter-spacing:.18em;text-transform:uppercase;
+    color:var(--accent);display:flex;align-items:center;gap:12px;margin-bottom:22px}
+  .label::after{content:"";flex:1;height:1px;background:var(--grid)}
+  .num{font:400 12px/1 var(--mono);color:var(--muted)}
+
+  h1{font-size:40px;line-height:1.14;font-weight:750;letter-spacing:-.015em;margin-bottom:22px}
+  h2{font-size:28px;line-height:1.2;font-weight:700;letter-spacing:-.01em;margin-bottom:16px}
+  .lead{font-size:18.5px;color:var(--ink-2);margin-bottom:26px;max-width:66ch}
+  p{color:var(--ink-2)}
 
   .btn{display:inline-block;background:var(--accent);color:#fff;text-decoration:none;
-    font:600 17px/1 -apple-system,"Segoe UI",sans-serif;
-    padding:17px 30px;border-radius:12px;border:1px solid #8f3d16;
-    box-shadow:0 2px 0 #8f3d16, 0 10px 24px rgba(168,73,28,.22);
-    transition:transform .14s ease, box-shadow .14s ease}
-  .btn:hover{transform:translateY(-1px);box-shadow:0 3px 0 #8f3d16, 0 14px 28px rgba(168,73,28,.26)}
-  .btn:active{transform:translateY(1px);box-shadow:0 1px 0 #8f3d16}
+    font:600 16px/1 -apple-system,sans-serif;padding:16px 28px;border-radius:8px;
+    border:1px solid #8f3d16;box-shadow:0 2px 0 #8f3d16;
+    transition:transform .13s ease,box-shadow .13s ease}
+  .btn:hover{transform:translateY(-1px)}
+  .btn:active{transform:translateY(1px);box-shadow:none}
   .btn-ghost{display:inline-block;background:transparent;color:var(--accent);text-decoration:none;
-    font:600 16px/1 -apple-system,"Segoe UI",sans-serif;
-    padding:15px 26px;border-radius:12px;border:1.5px solid var(--accent);
-    transition:background .14s ease}
+    font:600 15px/1 -apple-system,sans-serif;padding:14px 24px;border-radius:8px;border:1.5px solid var(--accent)}
   .btn-ghost:hover{background:var(--accent-soft)}
-  .under{color:var(--muted);font:15px/1.5 -apple-system,"Segoe UI",sans-serif;margin-top:14px}
+  .note{font:14px/1.55 var(--mono);color:var(--muted);margin-top:12px}
 
-  section{padding:72px 0;border-top:1px solid var(--line)}
-  section:first-of-type{border-top:none}
-  h2{font-size:30px;line-height:1.2;margin-bottom:14px;font-weight:700}
-  .sub{font-size:18px;color:var(--ink-2);margin-bottom:30px;max-width:64ch}
+  .bio{border:1px solid var(--grid);border-radius:10px;padding:24px 26px;margin-bottom:26px;
+    background:linear-gradient(180deg,#fffefb,#faf7f0)}
+  .bio ul{list-style:none}
+  .bio li{font-size:17px;color:var(--ink);padding:7px 0 7px 34px;position:relative;border-bottom:1px dotted var(--grid)}
+  .bio li:last-child{border-bottom:none}
+  .bio li::before{content:"→";position:absolute;left:0;color:var(--accent);font-family:var(--mono)}
+  .bio b{color:var(--accent)}
 
-  .pain{display:grid;gap:14px;margin-bottom:28px}
-  .pain div{background:var(--paper);border:1px solid var(--line);border-left:4px solid var(--accent);
-    border-radius:12px;padding:16px 20px;font-size:17px;color:var(--ink-2)}
-  .pain b{color:var(--ink)}
+  .fails{display:grid;gap:12px}
+  .fail{border:1px solid var(--grid);border-radius:10px;padding:16px 20px;display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:start;background:var(--paper)}
+  .fail .x{font:700 20px/1 var(--mono);color:var(--accent)}
+  .fail p{font-size:16px;margin:0}
+  .fail b{color:var(--ink)}
 
-  .ba{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-  .ba .card{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:20px 22px}
-  .ba .was{color:var(--muted);background:var(--wash)}
-  .ba .now{border:2px solid var(--accent)}
-  .ba .tag{font:700 12px/1 -apple-system,sans-serif;letter-spacing:.12em;text-transform:uppercase;
-    color:var(--muted);display:block;margin-bottom:12px}
-  .ba .now .tag{color:var(--accent)}
-  .ba p{font-size:15.5px;line-height:1.55}
-
-  .steps{counter-reset:s;display:grid;gap:0;margin-bottom:6px}
-  .step{display:grid;grid-template-columns:52px 1fr;gap:18px;padding:22px 0;border-bottom:1px dashed var(--line)}
+  .steps{display:grid;gap:0;border:1px solid var(--grid);border-radius:12px;overflow:hidden}
+  .step{display:grid;grid-template-columns:110px 1fr auto;gap:20px;padding:20px 24px;align-items:center;border-bottom:1px solid var(--grid);background:var(--paper)}
   .step:last-child{border-bottom:none}
-  .step::before{counter-increment:s;content:counter(s);
-    width:52px;height:52px;border-radius:50%;background:var(--accent-soft);color:var(--accent);
-    font:700 22px/52px Georgia;text-align:center}
-  .step h3{font-size:19px;margin-bottom:6px}
-  .step p{font-size:16px;color:var(--ink-2)}
+  .step .code{font:700 13px/1.4 var(--mono);color:var(--muted)}
+  .step .code b{display:block;color:var(--accent);font-size:15px}
+  .step h3{font-size:17px;margin-bottom:4px}
+  .step p{font-size:15px;margin:0}
+  .step .meta{font:600 13px/1.5 var(--mono);color:var(--ink);white-space:nowrap;text-align:right}
 
-  .tiers{display:grid;gap:16px}
-  .tier{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:24px 26px}
+  .ba{display:grid;grid-template-columns:1fr;gap:0;border:1px solid var(--grid);border-radius:12px;overflow:hidden}
+  .ba .row{display:grid;grid-template-columns:120px 1fr;gap:20px;padding:18px 24px;border-bottom:1px solid var(--grid)}
+  .ba .row:last-child{border-bottom:none}
+  .ba .tag{font:700 12px/1.4 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+  .ba .row.now{background:#fdfaf5}
+  .ba .row.now .tag{color:var(--accent)}
+  .ba p{font-size:16px;margin:0}
+
+  .proof{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:24px}
+  .proof div{border:1px solid var(--grid);border-radius:10px;padding:14px 16px;text-align:center;background:var(--paper)}
+  .proof .v{font:700 24px/1.2 var(--mono);color:var(--accent)}
+  .proof .k{font:13px/1.4 var(--mono);color:var(--muted);margin-top:4px}
+
+  .tiers{display:grid;gap:14px}
+  .tier{border:1px solid var(--grid);border-radius:12px;background:var(--paper);padding:22px 26px}
   .tier.star{border:2px solid var(--accent);position:relative}
-  .tier.star::before{content:"Выбирают чаще";position:absolute;top:-11px;left:22px;
-    background:var(--accent);color:#fff;font:600 12px/1 -apple-system,sans-serif;
-    padding:5px 12px;border-radius:999px;letter-spacing:.04em}
-  .tier h3{font-size:20px;margin-bottom:2px}
-  .tier .for{font-size:14.5px;color:var(--muted);margin-bottom:12px}
-  .tier .price{font-size:30px;font-weight:700;margin-bottom:12px}
-  .tier .price span{font-size:15px;font-weight:400;color:var(--muted)}
-  .tier ul{list-style:none;margin-bottom:16px}
-  .tier li{font-size:15.5px;color:var(--ink-2);padding-left:26px;position:relative;margin-bottom:7px}
+  .tier.star::before{content:"★ выбирают чаще";position:absolute;top:-10px;right:20px;
+    background:var(--accent);color:#fff;font:600 11px/1 var(--mono);letter-spacing:.08em;
+    padding:5px 12px;border-radius:4px;text-transform:uppercase}
+  .tier .head{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap}
+  .tier h3{font-size:19px}
+  .tier .price{font:700 24px/1 var(--mono);color:var(--ink)}
+  .tier .price span{display:block;font:400 13px/1.4 var(--mono);color:var(--muted);text-align:right}
+  .tier .for{font:14px/1.5 var(--mono);color:var(--muted);margin:6px 0 12px}
+  .tier ul{list-style:none;margin-bottom:14px}
+  .tier li{font-size:15.5px;padding-left:24px;position:relative;margin-bottom:6px}
   .tier li::before{content:"—";position:absolute;left:0;color:var(--accent)}
 
-  .honest{background:var(--wash);border-radius:16px;padding:26px 28px}
-  .honest p{font-size:17px;color:var(--ink-2)}
+  .honest{border:2px solid var(--accent);border-radius:12px;padding:24px 28px;background:#fdfaf5}
+  .honest p{margin:0;font-size:16.5px}
   .honest b{color:var(--ink)}
 
-  .qa{display:grid;gap:14px}
-  .qa details{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:16px 20px}
-  .qa summary{font-weight:700;cursor:pointer;font-size:16.5px}
-  .qa p{margin-top:10px;font-size:15.5px;color:var(--ink-2)}
+  .qa{display:grid;gap:10px}
+  .qa details{border:1px solid var(--grid);border-radius:10px;padding:15px 20px;background:var(--paper)}
+  .qa summary{font-weight:650;cursor:pointer;font-size:16px}
+  .qa p{margin-top:10px;font-size:15.5px}
 
-  .final{text-align:center;padding:84px 0}
+  .final{text-align:center}
   .final .lead{margin-left:auto;margin-right:auto}
+  .pay{border:1px dashed var(--accent);border-radius:10px;padding:16px 20px;
+    font:14px/1.6 var(--mono);color:var(--ink-2);margin-top:26px;text-align:left}
+  .pay b{color:var(--accent)}
 
-  .pay{background:var(--paper);border:1px solid var(--line);border-radius:14px;
-    padding:20px 24px;font-size:15.5px;color:var(--ink-2);margin:28px 0 0;text-align:left}
-  .pay b{color:var(--ink)}
-
-  footer{border-top:1px solid var(--line);margin-top:64px;padding:28px 24px 48px;
-    text-align:center;font:15px/1.6 -apple-system,"Segoe UI",sans-serif;color:var(--muted)}
-  footer a{color:var(--accent);text-decoration:none;border-bottom:1px solid currentColor}
+  footer{border-top:1px solid var(--grid);padding:26px 56px 48px;text-align:center;
+    font:13.5px/1.7 var(--mono);color:var(--muted)}
+  footer a{color:var(--accent);text-decoration:none}
 
   @media (max-width:640px){
-    body{font-size:17px}
-    .wrap{padding:44px 18px 0}
-    h1{font-size:32px}
-    .lead{font-size:18px}
-    section{padding:52px 0}
-    .ba{grid-template-columns:1fr}
-    .tier.star{order:-1}
+    .frame{padding:0 20px}
+    h1{font-size:29px}
+    h2{font-size:23px}
+    .block{padding:44px 0}
+    .step{grid-template-columns:1fr;gap:8px}
+    .step .meta{text-align:left}
+    .ba .row{grid-template-columns:1fr;gap:8px}
+    .proof{grid-template-columns:1fr 1fr}
+    footer{padding:26px 20px 48px}
   }
 </style>
 </head>
 <body>
 
-<div class="wrap">
+<div class="frame">
 
-  <header>
-    <p class="kicker">Основа · резюме под вашу реальную карьеру</p>
-    <h1>Вам отвечают на три отклика из ста. Дело не в опыте — дело в первых четырёх строках.</h1>
-    <p class="lead">Меня зовут Евгений Андреев, мне 50, за плечами семь индустрий — от теплосети до разработки ботов. Я разобрал свою карьеру на проверяемые факты, собрал из них файл-Основу и теперь делаю то же для людей, чей путь не был прямой. Без выдуманных процентов. Каждая строка — с меткой «подтверждено».</p>
-    <a class="btn" href="https://t.me/eandreev">Показать мой резюме-разбор — бесплатно</a>
-    <p class="under">Первый разбор занимает 10 минут и ничего не стоит. Дальше решаете сами.</p>
-  </header>
+  <!-- 01 Герой и проблема (PAS) -->
+  <div class="block">
+    <p class="label">01 · Проблема героя <span class="num">/ hero</span></p>
+    <h1>Сильный опыт, семь индустрий — а HR отклоняет резюме как «потеряшку».</h1>
+    <p class="lead">Знакомо: очередной карьерный взлёт, смена сферы — и снова взгляд кадровика, который не видит за нестандартным путём ни одного полезного факта. Дело не в опыте. Дело в том, что он записан на языке биографии, а читают его на языке задач.</p>
 
-  <section>
-    <h2>Почему молчат на отклики</h2>
-    <p class="sub">Рекрутер тратит на первый проход по резюме около 7 секунд (исследование Ladders, eye-tracking). За это время он ищет ответ на один вопрос: какую задачу этот человек решит? Вот что он видит вместо:</p>
-    <div class="pain">
-      <div><b>«Руководитель проектов, ответственный за…»</b> — это кто вы. А нужен тот, кто решит его задачу на этой неделе.</div>
-      <div><b>«Минус 40 % жалоб, рост эффективности»</b> — цифры без опоры. Один уточняющий вопрос — и вы провалились.</div>
-      <div><b>Три страницы биографии</b> — опыт перечислен, а не продан. Самое сильное спрятано на третьей странице.</div>
+    <div class="bio">
+      <p style="margin-bottom:10px;color:var(--ink)">Меня зовут <b>Евгений Андреев</b>, мне 49, за плечами семь индустрий:</p>
+      <ul>
+        <li>от <b>казино и ночных клубов</b> до <b>инженера по телеметрии энергоснабжения</b></li>
+        <li>от <b>метролога Мособлгаза</b> до <b>программирования (разработки) маркетплейсов</b></li>
+        <li>от <b>грантов Минэкономразвития</b> до <b>художественной школы орнамента</b></li>
+      </ul>
     </div>
-    <p class="sub">Это лечится не «красивым написанием», а разбором: что из вашего опыта бьёт в конкретную вакансию. Смотрите, как это выглядит.</p>
-  </section>
 
-  <section>
-    <h2>Мой собственный первый экран — до и после</h2>
-    <div class="ba">
-      <div class="card was"><span class="tag">Было</span><p>UX/UI Designer, Product Psychologist. Снижение повторных жалоб на 40 %. CJM, JTBD, CustDev.</p></div>
-      <div class="card now"><span class="tag">Стало</span><p>Исследователь и проектировщик опыта в сложных системах: промышленная автоматизация, премиальный сервис, образование, AI-интерфейсы. Обучил 400+ человек · узлы учёта газа и тепла · Telegram-бот на Python — 4 355 строк, 15+ релизов, репозиторий открыт.</p></div>
+    <p class="lead">Каждый новый взлёт HR смотрели на меня как на потеряшку и отклоняли резюме. Пока я не разобрал карьеру на проверяемые факты, не собрал из них файл-Основу и не перестал проигрывать за 7 секунд. Теперь делаю то же для людей, чей путь не был прямой. Без выдуманных процентов: каждая строка — с меткой «подтверждено».</p>
+    <a class="btn" href="https://t.me/eandreev">Бесплатный разбор моего резюме — 10 минут</a>
+    <p class="note">// без оплаты и обязательств · сначала диагноз, потом решение</p>
+  </div>
+
+  <!-- 05 Избежание провала -->
+  <div class="block">
+    <p class="label">02 · Где резюме теряет отклики <span class="num">/ stakes</span></p>
+    <h2>Три отказа до того, как кто-то дочитал до вашего опыта</h2>
+    <div class="fails">
+      <div class="fail"><span class="x">01</span><p><b>Первые четыре строки — о вас, а не для читающего.</b> Рекрутер тратит на первый проход около 7 секунд (eye-tracking, Ladders, 2018) и ищет один вопрос: какую задачу вы решите. Должность и «ответственный за» читаются как «ничего для меня».</p></div>
+      <div class="fail"><span class="x">02</span><p><b>Цифра, которую вы не считали.</b> «Минус 40 % жалоб» рушится на первом уточняющем вопросе — и роняет доверие ко всем остальным строкам, даже честным.</p></div>
+      <div class="fail"><span class="x">03</span><p><b>Самое сильное — на второй-третьей странице.</b> На вакансию приходят сотни откликов: до третьей страницы физически не доходят.</p></div>
     </div>
-    <p class="under">Проценты слева я сам когда-то не считал. Справа — только то, что проверяется за минуту: 400 обученных, узлы учёта, открытый код. Именно за это звонят.</p>
-  </section>
+    <p class="lead" style="margin-top:20px">Это инженерная задача, а не вопрос таланта: поменять вход и выход данных. Дальше — как она решается.</p>
+  </div>
 
-  <section>
-    <h2>Как это работает</h2>
+  <!-- 02 Гид -->
+  <div class="block">
+    <p class="label">03 · Гид: почему мне можно доверять <span class="num">/ guide</span></p>
+    <h2>Я не теоретик — каждый пункт своего резюме показываю руками</h2>
+    <div class="proof">
+      <div><div class="v">400+</div><div class="k">обученных человек в трёх службах казино</div></div>
+      <div><div class="v">2 МВт</div><div class="k">газогенераторная установка: переговоры с немецкими поставщиками</div></div>
+      <div><div class="v">4 355</div><div class="k">строк Python в продакшене, 15+ релизов, репозиторий открыт</div></div>
+    </div>
+    <p class="lead">Теплосеть и Мособлгаз: телеметрия, узлы учёта, метрология. Жуковка: служба сервиса для резидентов-топ-менеджеров. Грант Минэкономразвития и школа орнамента. Сейчас — разработка и языковые модели. Семь индустрий научили одному: систему «человек → резюме → работа» можно отладить, как любой другой контур.</p>
+  </div>
+
+  <!-- 03 План -->
+  <div class="block">
+    <p class="label">04 · План: три шага <span class="num">/ plan</span></p>
+    <h2>Порядок работ — фиксированный, без «как пойдёт»</h2>
     <div class="steps">
-      <div class="step"><div><h3>Бесплатный разбор — 10 минут</h3><p>Присылаете резюме (можно в любом виде). Я возвращаю голосовое или текст: три места, где оно теряет отклики, и что исправить первым. Без оплаты, без обязательств — мне нужна практика на живых примерах, вам — честный диагноз.</p></div></div>
-      <div class="step"><div><h3>Первый экран — 1 490 ₽, за 24 часа</h3><p>Переписываю заголовок, четыре строки «зачем я вам» и три главных пункта под конкретную вакансию. Одна итерация правок входит. Если не зайдёт — файл ваш, деньги не возвращаю, но и не держу.</p></div></div>
-      <div class="step"><div><h3>Основа — разбор всей карьеры</h3><p>12 вопросов голосовыми в удобное время. Из ответов собираю файл: каждый факт с меткой «подтверждено / оценка / не писать» и стоп-лист того, что писать нельзя. Из него любая версия резюме собирается за 20 минут — хоть через год.</p></div></div>
+      <div class="step"><div class="code"><b>ШАГ 1</b>разбор</div><div><h3>Бесплатный диагноз — 10 минут</h3><p>Присылаете резюме в любом виде — возвращаете с тремя местами, где оно теряет отклики, и что править первым.</p></div><div class="meta">0 ₽<br>сегодня</div></div>
+      <div class="step"><div class="code"><b>ШАГ 2</b>первый экран</div><div><h3>Заголовок и четыре строки «зачем я вам»</h3><p>Под конкретную вакансию: одна строка задачи + три проверяемых доказательства + три главных пункта опыта.</p></div><div class="meta">1 490 ₽<br>24 часа</div></div>
+      <div class="step"><div class="code"><b>ШАГ 3</b>основа</div><div><h3>Файл всей карьеры с метками</h3><p>12 вопросов голосовыми → факты с метками «подтверждено / оценка / не писать» + стоп-лист. Из него любая версия резюме собирается за 20 минут — хоть вами, хоть через год.</p></div><div class="meta">5 900 ₽<br>48 часов</div></div>
     </div>
-    <p class="under">Начинаем с первого шага — он бесплатный и ни к чему не обязывает.</p>
-  </section>
+    <p class="lead" style="margin-top:20px">Начинается всё с шага 1 — он бесплатный и ни к чему не обязывает.</p>
+    <a class="btn" href="https://t.me/eandreev">Прислать резюме на шаг 1</a>
+  </div>
 
-  <section>
-    <h2>Что можно заказать</h2>
+  <!-- 06 Успех: доказательство на себе -->
+  <div class="block">
+    <p class="label">05 · Доказательство на себе <span class="num">/ before → after</span></p>
+    <h2>Вход и выход после разбора</h2>
+    <div class="ba">
+      <div class="row was"><span class="tag">Было</span><p>UX/UI Designer, Product Psychologist. Снижение повторных жалоб на 40 %. CJM, JTBD, CustDev.</p></div>
+      <div class="row now"><span class="tag">Стало</span><p>Исследователь и проектировщик опыта в сложных системах: промышленная автоматизация, премиальный сервис, образование, AI-интерфейсы. Проверяется за минуту: обучил 400+ человек · узлы учёта газа и тепла · Telegram-бот на Python — 4 355 строк, 15+ релизов, репозиторий открыт.</p></div>
+    </div>
+    <p class="note">// слева — проценты, которые я не считал; справа — только то, что проверяется за минуту</p>
+  </div>
+
+  <!-- Оффер -->
+  <div class="block">
+    <p class="label">06 · Состав работ и стоимость <span class="num">/ offer</span></p>
+    <h2>Что входит в каждую ступень</h2>
     <div class="tiers">
       <div class="tier star">
-        <h3>Основа + резюме</h3>
-        <p class="for">для тех, кто хочет один раз разобраться и больше не переписывать резюме с нуля</p>
-        <div class="price">5 900 ₽ <span>· первым пяти 3 900 ₽</span></div>
+        <div class="head"><h3>Основа + резюме</h3><div class="price">5 900 ₽<span>первым пяти — 3 900 ₽</span></div></div>
+        <p class="for">// для тех, кто хочет один раз разобрать карьеру и больше не переписывать резюме с нуля</p>
         <ul>
-          <li>12 вопросов голосовыми, когда удобно</li>
+          <li>12 вопросов голосовыми, в удобное время</li>
           <li>файл Основа: факты с метками, стоп-лист</li>
-          <li>резюме под одну роль + сопроводительное</li>
+          <li>резюме под 1 роль + сопроводительное</li>
           <li>48 часов после ответов, две итерации правок</li>
         </ul>
-        <a class="btn" href="https://t.me/eandreev">Начать с бесплатного разбора</a>
+        <a class="btn" href="https://t.me/eandreev">Занять место среди первых пяти</a>
       </div>
       <div class="tier">
-        <h3>Первый экран</h3>
-        <p class="for">если нужна только одна вакансия и быстро</p>
-        <div class="price">1 490 ₽</div>
+        <div class="head"><h3>Первый экран</h3><div class="price">1 490 ₽<span>24 часа</span></div></div>
+        <p class="for">// если нужна одна конкретная вакансия и быстро</p>
         <ul>
           <li>заголовок и 4 строки «зачем я вам»</li>
           <li>3 главных пункта под вакансию</li>
-          <li>24 часа, одна итерация правок</li>
+          <li>одна итерация правок входит</li>
         </ul>
         <a class="btn-ghost" href="https://t.me/eandreev">Обсудить</a>
       </div>
       <div class="tier">
-        <h3>Основа+</h3>
-        <p class="for">для тех, кто идёт на несколько разных ролей сразу</p>
-        <div class="price">12 900 ₽</div>
+        <div class="head"><h3>Основа+</h3><div class="price">12 900 ₽<span>4 дня</span></div></div>
+        <p class="for">// для тех, кто идёт на несколько разных ролей сразу</p>
         <ul>
           <li>всё из «Основы + резюме»</li>
           <li>резюме под 3 роли</li>
@@ -191,38 +246,43 @@
         <a class="btn-ghost" href="https://t.me/eandreev">Обсудить</a>
       </div>
     </div>
-    <div class="pay"><b>Как оплатить.</b> СБП по номеру +7(925)888-58-82, получатель Евгений Валерьевич А. Чек самозанятого — в течение часа. Первый экран — вперёд целиком, Основа — половина вперёд, половина после первой версии. 1 490 за первый экран засчитываются при переходе на Осную в течение 30 дней.</div>
-  </section>
+    <div class="pay"><b>оплата:</b> СБП +7(925)888-58-82, получатель Евгений Валерьевич А. · чек самозанятого в течение часа · первый экран — вперёд целиком, Основа — половина вперёд, половина после первой версии · 1 490 за первый экран засчитываются при переходе на Осную в течение 30 дней</div>
+  </div>
 
-  <section>
+  <!-- Снятие риска -->
+  <div class="block">
+    <p class="label">07 · Снятие риска <span class="num">/ honesty</span></p>
     <div class="honest">
-      <h2>Чего я не обещаю</h2>
-      <p><b>Не обещаю</b> офферов, числа приглашений и сроков трудоустройства — это зависит от рынка и от вас на собеседовании. <b>Обещаю</b> другое: файл в срок, каждая строка с подтверждением, правки до «это я». И стоп-лист: то, за что вам будет неловко на уточняющем вопросе, в резюме не попадёт. Мне 50 и моя репутация — это всё, что здесь продаётся.</p>
+      <h2 style="margin-bottom:10px">Чего я не обещаю</h2>
+      <p><b>Не обещаю</b> офферов, числа приглашений и сроков трудоустройства — это зависит от рынка и от вас на собеседовании. <b>Обещаю</b> другое: файл в срок, метка у каждой строки, правки до «это я». В резюме не попадёт ничего, за что будет неловко на уточняющем вопросе. Мне 49, и моя репутация — единственный актив, который здесь продаётся.</p>
     </div>
-  </section>
+  </div>
 
-  <section>
-    <h2>Частые вопросы</h2>
+  <!-- FAQ / возражения -->
+  <div class="block">
+    <p class="label">08 · Частые вопросы <span class="num">/ faq</span></p>
     <div class="qa">
-      <details><summary>На Kwork делают за 1 500. Чем вы лучше?</summary><p>На Kwork продают файл. После моей работы вы сами соберёте любую версию за 20 минут, потому что у вас остаётся Основа — файл всей карьеры с метками. Нужен просто файл — честно, Kwork дешевле.</p></details>
-      <details><summary>Я сам сделаю в ChatGPT</summary><p>Сделаете. Модель напишет то же, что двустам откликнувшимся, — рекрутеры узнают этот стиль с первого абзаца. Модель не знает, что именно из вашего опыта продаёт в эту вакансию. Я разбираю это с вами по вопросам.</p></details>
-      <details><summary>Мне 47, возраст — приговор?</summary><p>Мне 50. Возраст читается не из даты рождения, а из того, как написан опыт: перечислением мест за 25 лет. Периоды старше 15 лет сворачиваются в одну строку, первый экран пишется под задачу. Проверил на себе.</p></details>
-      <details><summary>А гарантия, что возьмут?</summary><p>Нет и не будет — и тот, кто обещает, врёт. Гарантирую файл за 48 часов, метку у каждой строки и две итерации правок.</p></details>
+      <details><summary>На Kwork делают за 1 500. Чем вы лучше?</summary><p>На Kwork продают файл. После разбора у вас остаётся Основа — вы сами соберёте любую версию за 20 минут. Нужен просто файл — честно, Kwork дешевле.</p></details>
+      <details><summary>Сам сделаю в ChatGPT</summary><p>Сделаете. Модель напишет то же, что двумстам другим откликнувшимся, — рекрутеры узнают этот стиль с первого абзаца. Модель не знает, чем именно ваш опыт бьёт в их вакансию.</p></details>
+      <details><summary>Мне 47, возраст — приговор?</summary><p>Мне 49. Возраст читается не из даты рождения, а из того, как написан опыт: перечислением мест за 25 лет. Периоды старше 15 лет сворачиваются в одну строку, первый экран пишется под задачу. Проверил на себе.</p></details>
+      <details><summary>А гарантия, что возьмут?</summary><p>Нет и не будет — и тот, кто обещает, продаёт воздух. Гарантирую файл за 48 часов, метку у каждой строки и две итерации правок.</p></details>
     </div>
-  </section>
+  </div>
 
-  <section class="final">
+  <!-- Финальный CTA -->
+  <div class="block final">
+    <p class="label">09 · Следующий шаг <span class="num">/ cta</span></p>
     <h2>Начните с бесплатного разбора</h2>
-    <p class="lead">Пришлите резюме — через 10 минут вы узнаете три места, где оно теряет отклики. Дальше решаете сами, и это нормально, если решите «ничего не делать».</p>
+    <p class="lead">Пришлите резюме — через 10 минут узнаете три места, где оно теряет отклики. Дальше решаете сами; «ничего не делать» — тоже нормальный ответ.</p>
     <a class="btn" href="https://t.me/eandreev">Написать в Telegram</a>
-    <p class="under">Отвечаю сам, без ассистентов. Обычно в течение часа.</p>
-  </section>
+    <p class="note">// отвечаю сам, обычно в течение часа</p>
+  </div>
 
 </div>
 
 <footer>
-  Канал с разборами и примерами до/после: <a href="https://t.me/EVAN_OCHOBA">t.me/EVAN_OCHOBA</a><br>
-  Евгений Андреев · Основа · Москва / удалённо
+  разборы и примеры до/после → <a href="https://t.me/EVAN_OCHOBA">t.me/EVAN_OCHOBA</a><br>
+  Евгений Андреев · Основа · Москва / удалённо · 2026
 </footer>
 
 </body>
